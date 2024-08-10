@@ -8,7 +8,7 @@ Widget flightCategorySelectionDropdown(){
   return Builder(builder: (context){
     return Container(
         height: 35,
-        decoration: BoxDecoration(border: Border.all(width: 0.5,color: Colors.black26)),
+        decoration: BoxDecoration(border: Border.all(width: 1,color: Colors.transparent)),
     child: DropdownButtonHideUnderline(
       child: DropdownButton(elevation: 0,
           value: 'Economy',

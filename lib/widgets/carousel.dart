@@ -25,8 +25,7 @@ class _MultiImageCarouselState extends State<MultiImageCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return Column(
         children: [
           CarouselSlider(
             items: _images.map((imagePath) {
@@ -86,8 +85,8 @@ class _MultiImageCarouselState extends State<MultiImageCarousel> {
             ],
           ),
         ],
-      ),
-    );
+      );
+
   }
 }
 
