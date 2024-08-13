@@ -13,6 +13,10 @@ TextStyle blueNormal(){
  return const TextStyle(color: Colors.blue,fontSize: 13,fontWeight: FontWeight.w200);
 }
 
+TextStyle whiteNormal(){
+ return const TextStyle(color: Colors.white,fontSize: 13,fontWeight: FontWeight.w200);
+}
+
 TextStyle subtitle(){
  return const TextStyle(fontSize: 30,fontWeight: FontWeight.w700);
 }
@@ -25,5 +29,8 @@ TextStyle? title(){
 }
 
 TextStyle? small(){
+ return const TextStyle(fontSize: 10,fontWeight: FontWeight.normal);
+}
+TextStyle? whiteSmall(){
  return const TextStyle(fontSize: 10,fontWeight: FontWeight.normal);
 }

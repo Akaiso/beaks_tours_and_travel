@@ -1,26 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'hover_effect_button.dart';
 
 Widget offeredServicesTabsNavigator(
-    VoidCallback onTap, String title, IconData icon, Color color) {
+    VoidCallback onTap, String title, String imageString, Color color) {
   return Builder(
     builder: (context) => Flexible(
       child: Container(
-          width: 100,
           color: color,
           child: InkWell(
             onTap: onTap,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon),
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 10),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 80,
+                      width: 100,
+                      child: Image.asset(
+                        imageString,
+                        fit: BoxFit.cover,
+                      )),
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                ],
+              ),
             ),
           )),
     ),
@@ -42,49 +51,55 @@ Widget tripSearchDisplayOption(
     String midRowOrText,
     String day) {
   return Builder(
-    builder: (context) => Container(
-      decoration: BoxDecoration(
-        border:
-            Border(right: BorderSide(width: borderWidth, color: borderColor)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(right: 20, top: 10),
+    builder: (context) => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          border:
+              Border(right: BorderSide(width: borderWidth, color: borderColor)),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    topRowText,
-                    style: const TextStyle(
-                      fontSize: 10,
+            FittedBox(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      topRowText,
+                      style: const TextStyle(
+                        fontSize: 10,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                iconButton
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  date,
-                  style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.w700),
-                ),
-                Text(
-                  midRowOrText,
-                  style: const TextStyle(
-                    fontSize: 15,
+                  const SizedBox(
+                    width: 10,
                   ),
-                ),
-              ],
+                  iconButton
+                ],
+              ),
+            ),
+            FittedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    date,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    midRowOrText,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
             ),
             Text(
               day,

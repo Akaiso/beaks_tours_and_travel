@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_app/utils/colors.dart';
 
 class HoverEffectButton extends StatefulWidget {
   const HoverEffectButton(
@@ -21,21 +22,21 @@ class _HoverEffectButtonState extends State<HoverEffectButton> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    color = Colors.orange;
+    color = kOrange();
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return InkWell(onTap: (){},
       child: MouseRegion(
         onHover: (_) {
           setState(() {
-            color = Colors.blue;
+            color = kBlue();
           });
         },
         onExit: (_) {
           setState(() {
-            color = Colors.orange;
+            color = kOrange();
           });
         },
         child: Container(
