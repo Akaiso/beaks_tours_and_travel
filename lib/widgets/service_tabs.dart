@@ -9,7 +9,11 @@ Widget offeredServicesTabsNavigator(
   return Builder(
     builder: (context) => Flexible(
       child: Container(
+        decoration: BoxDecoration(
           color: color,
+          borderRadius: MediaQuery.of(context).size.width < 800? BorderRadius.circular(10) : BorderRadius.circular(0),
+        ),
+
           child: InkWell(
             onTap: onTap,
             child: Padding(

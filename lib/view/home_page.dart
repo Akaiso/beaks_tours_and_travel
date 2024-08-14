@@ -49,6 +49,9 @@ class _HomePageState extends State<HomePage>
   bool isVisibleHotel = false;
   bool flightRow = true;
   bool hotelRow = false;
+  Color textHoverColor1 = Colors.black;
+  Color textHoverColor2 = Colors.black;
+  Color textHoverColor3 = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -114,292 +117,696 @@ class _HomePageState extends State<HomePage>
                           image: AssetImage('assets/images/airport2.jpg'),
                           fit: BoxFit.cover),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 15,),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: SizedBox(
-                            width:MediaQuery.of(context).size.width,
-                            child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(color: Colors.red,
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width < 800 ? 100:200,
-                                    child: MediaQuery.of(context).size.width < 800
-                                        ? Image.asset(
-                                            'assets/images/standalonelogo.png',
-                                            fit: BoxFit.scaleDown,
-                                          )
-                                        : Image.asset('assets/images/logo.png',fit: BoxFit.cover,),
-                                  ),
-                                  SizedBox(width: MediaQuery.of(context).size.width * 0.1,),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width * 0.7  ,
-                                   // height: 70,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        offeredServicesTabsNavigator(
-                                            () {},
-                                            " Flight ",
-                                            'assets/images/flight.png',
-                                            Colors.white),
-                                        offeredServicesTabsNavigator(() {}, " Hotel ",
-                                            "assets/images/hotel.png", Colors.white),
-                                        offeredServicesTabsNavigator(
-                                            () {},
-                                            " Cruise ",
-                                            "assets/images/cruise.png",
-                                            Colors.white),
-                                        offeredServicesTabsNavigator(() {}, " Visa ",
-                                            "assets/images/visa.png", Colors.white),
-                                        offeredServicesTabsNavigator(() {}, " Rides ",
-                                            'assets/images/rides.png', Colors.white),
-                                        offeredServicesTabsNavigator(
-                                            () {},
-                                            " Holiday",
-                                            'assets/images/holiday.png',
-                                            Colors.white),
-                                      ],
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 20.0),
+                                      child: SizedBox(
+                                        height: 100,
+                                        width:
+                                            MediaQuery.of(context).size.width <
+                                                    800
+                                                ? 80
+                                                : 200,
+                                        child:
+                                            MediaQuery.of(context).size.width <
+                                                    800
+                                                ? Image.asset(
+                                                    'assets/images/standalonelogo.png',
+                                                    fit: BoxFit.scaleDown,
+                                                  )
+                                                : Image.asset(
+                                                    'assets/images/logo.png',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                      ),
                                     ),
                                   ),
+                                  // SizedBox(width: MediaQuery.of(context).size.width * 0.1,),
+                                  Expanded(
+                                    flex:
+                                        MediaQuery.of(context).size.width < 800
+                                            ? 1
+                                            : 3,
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.7,
+                                      child: MediaQuery.of(context).size.width <
+                                              800
+                                          ? const SizedBox()
+                                          : Row(
+                                              //mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                offeredServicesTabsNavigator(
+                                                    () {},
+                                                    " Flight ",
+                                                    'assets/images/flight.png',
+                                                    Colors.white),
+                                                offeredServicesTabsNavigator(
+                                                    () {},
+                                                    " Stays ",
+                                                    "assets/images/hotel.png",
+                                                    Colors.white),
+                                                offeredServicesTabsNavigator(
+                                                    () {},
+                                                    " Cruise ",
+                                                    "assets/images/cruise.png",
+                                                    Colors.white),
+                                                offeredServicesTabsNavigator(
+                                                    () {},
+                                                    " Visa ",
+                                                    "assets/images/visa.png",
+                                                    Colors.white),
+                                                offeredServicesTabsNavigator(
+                                                    () {},
+                                                    " Rides ",
+                                                    'assets/images/rides.png',
+                                                    Colors.white),
+                                                offeredServicesTabsNavigator(
+                                                    () {},
+                                                    " Holidays",
+                                                    'assets/images/holiday.png',
+                                                    Colors.white),
+                                              ],
+                                            ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                      flex: MediaQuery.of(context).size.width <
+                                              800
+                                          ? 3
+                                          : 1,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 20.0),
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                      .size
+                                                      .width <
+                                                  800
+                                              ? 250
+                                              : 100,
+                                          height: 100,
+                                          child: MediaQuery.of(context)
+                                                      .size
+                                                      .width <
+                                                  800
+                                              ? Container(
+                                                  color: Colors.transparent,
+                                                  width: 700,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      const Expanded(
+                                                          child:
+                                                              MyAccountDropdown()),
+                                                      Expanded(
+                                                        child: IconButton(
+                                                            onPressed: () {},
+                                                            icon: const Icon(
+                                                              Icons.menu,
+                                                              color:
+                                                                  Colors.white,
+                                                            )),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              : const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: LanguageDropdown(),
+                                                    ),
+                                                    Expanded(
+                                                        child:
+                                                            MyAccountDropdown())
+                                                  ],
+                                                ),
+                                        ),
+                                      )),
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 20,
-                    child: CircleAvatar(
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.person)),
-                    ),
-                  ),
-                  Positioned(
-                    top: 300,
-                    left: 50,
-                    right: 50,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.5, color: Colors.black26),
-                        color: Colors.white70,
-                      ),
-                      height: 310, //MediaQuery.of(context).size.height / 2,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              color: Colors.white,
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Visibility(
+                              replacement: const SizedBox(),
+                              visible: MediaQuery.of(context).size.width < 800
+                                  ? true
+                                  : false,
+                              child: Center(
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
+                                  spacing: 4,
+                                  runSpacing: 4,
                                   children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: FittedBox(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            const HoverEffectButton(
-                                                fontWeight: FontWeight.w200,
-                                                fontSize: 13,
-                                                text: 'One Way'),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            const HoverEffectButton(
-                                                fontWeight: FontWeight.w200,
-                                                fontSize: 13,
-                                                text: 'Round Trip'),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            const HoverEffectButton(
-                                                fontWeight: FontWeight.w200,
-                                                fontSize: 13,
-                                                text: 'Multi City'),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
+                                    offeredServicesTabsNavigator(
+                                        () {},
+                                        " Flight ",
+                                        'assets/images/flight.png',
+                                        Colors.white),
+                                    offeredServicesTabsNavigator(
+                                        () {},
+                                        " Hotel ",
+                                        "assets/images/hotel.png",
+                                        Colors.white),
+                                    offeredServicesTabsNavigator(
+                                        () {},
+                                        " Cruise ",
+                                        "assets/images/cruise.png",
+                                        Colors.white),
+                                    offeredServicesTabsNavigator(
+                                        () {},
+                                        " Visa ",
+                                        "assets/images/visa.png",
+                                        Colors.white),
+                                    offeredServicesTabsNavigator(
+                                        () {},
+                                        " Rides ",
+                                        'assets/images/rides.png',
+                                        Colors.white),
+                                    offeredServicesTabsNavigator(
+                                        () {},
+                                        " Holiday",
+                                        'assets/images/holiday.png',
+                                        Colors.white),
+                                  ],
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    replacement: const SizedBox(),
+                    visible:
+                        MediaQuery.of(context).size.width < 800 ? false : true,
+                    child: Positioned(
+                      top: 300,
+                      left: 50,
+                      right: 50,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.5, color: Colors.black26),
+                          color: Colors.white70,
+                        ),
+                        height: 310, //MediaQuery.of(context).size.height / 2,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                color: Colors.white,
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        child: const FittedBox(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              HoverEffectButton(
+                                                  fontWeight: FontWeight.w200,
+                                                  fontSize: 13,
+                                                  text: 'One Way'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              HoverEffectButton(
+                                                  fontWeight: FontWeight.w200,
+                                                  fontSize: 13,
+                                                  text: 'Round Trip'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              HoverEffectButton(
+                                                  fontWeight: FontWeight.w200,
+                                                  fontSize: 13,
+                                                  text: 'Multi City'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
 
-                                            //DropdownButton to select flight class
-                                            flightCategorySelectionDropdown(),
-                                          ],
+                                              //DropdownButton to select flight class
+                                              FlightCategorySelectionDropdown(),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    FittedBox(
-                                      child: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        child: const Text(
-                                            'Book International and Domestic flights'),
-                                      ),
-                                    )
-                                  ],
+                                      FittedBox(
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          child: const Text(
+                                              'Book International and Domestic flights'),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                              const SizedBox(
+                                height: 20,
+                              ),
 
-                            //TRIP SELECTION OPTION SECTION
-                            Container(
-                              height: MediaQuery.of(context).size.height / 4,
-                              width: double.infinity, //140,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Colors.black26, width: 0.5),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Expanded(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: tripSearchDisplayOption(
-                                          0.5,
-                                          Colors.black26,
-                                          'From',
-                                          Container(),
-                                          'Select City',
-                                          '',
-                                          ''),
-                                    ),
-                                    Expanded(
-                                      child: tripSearchDisplayOption(
-                                          0.5,
-                                          Colors.black26,
-                                          'to',
-                                          Container(),
-                                          'Select City',
-                                          '',
-                                          ''),
-                                    ),
-                                    Expanded(
-                                      child: tripSearchDisplayOption(
-                                          0.5,
-                                          Colors.black26,
-                                          'Departure',
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                  Icons.arrow_drop_down_sharp)),
-                                          '2',
-                                          "Aug'24",
-                                          'Friday'),
-                                    ),
-                                    Expanded(
-                                      child: tripSearchDisplayOption(
-                                          0.5,
-                                          Colors.black26,
-                                          'Return',
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                  Icons.arrow_drop_down_sharp)),
-                                          '4',
-                                          "Aug'24",
-                                          'Sunday'),
-                                    ),
-                                    Expanded(
-                                      child: tripSearchDisplayOption(
-                                          0,
-                                          Colors.transparent,
-                                          'Passenger',
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                  Icons.arrow_drop_down_sharp)),
-                                          '1',
-                                          'Passenger',
-                                          ''),
-                                    ),
-                                  ],
+                              //TRIP SELECTION OPTION SECTION
+                              Container(
+                                height: MediaQuery.of(context).size.height / 4,
+                                width: double.infinity, //140,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Colors.black26, width: 0.5),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                              ),
-                            )
-                          ],
+                                child: Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: tripSearchDisplayOption(
+                                            0.5,
+                                            Colors.black26,
+                                            'From',
+                                            Container(),
+                                            'Select City',
+                                            '',
+                                            ''),
+                                      ),
+                                      Expanded(
+                                        child: tripSearchDisplayOption(
+                                            0.5,
+                                            Colors.black26,
+                                            'to',
+                                            Container(),
+                                            'Select City',
+                                            '',
+                                            ''),
+                                      ),
+                                      Expanded(
+                                        child: tripSearchDisplayOption(
+                                            0.5,
+                                            Colors.black26,
+                                            'Departure',
+                                            IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons
+                                                    .arrow_drop_down_sharp)),
+                                            '2',
+                                            "Aug'24",
+                                            'Friday'),
+                                      ),
+                                      Expanded(
+                                        child: tripSearchDisplayOption(
+                                            0.5,
+                                            Colors.black26,
+                                            'Return',
+                                            IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons
+                                                    .arrow_drop_down_sharp)),
+                                            '4',
+                                            "Aug'24",
+                                            'Sunday'),
+                                      ),
+                                      Expanded(
+                                        child: tripSearchDisplayOption(
+                                            0,
+                                            Colors.transparent,
+                                            'Passenger',
+                                            IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons
+                                                    .arrow_drop_down_sharp)),
+                                            '1',
+                                            'Passenger',
+                                            ''),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
 
                   //MAJOR SEARCH BUTTON
-                  Positioned(
-                    top:
-                        580, //MediaQuery.of(context).size.width < 1000 ? 555 : 590,
-                    left: MediaQuery.of(context).size.width * 0.40,
-                    right: MediaQuery.of(context).size.width * 0.40,
-                    child: const SizedBox(
-                      height: 50,
-                      child: HoverEffectButton(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 25,
-                        text: 'Search',
+                  Visibility(
+                    replacement: const SizedBox(),
+                    visible:
+                        MediaQuery.of(context).size.width < 800 ? false : true,
+                    child: Positioned(
+                      top:
+                          580, //MediaQuery.of(context).size.width < 1000 ? 555 : 590,
+                      left: MediaQuery.of(context).size.width * 0.40,
+                      right: MediaQuery.of(context).size.width * 0.40,
+                      child: const SizedBox(
+                        height: 50,
+                        child: HoverEffectButton(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 25,
+                          text: 'Search',
+                        ),
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 700,
-                    left: MediaQuery.of(context).size.width * 0.15,
-                    right: MediaQuery.of(context).size.width * 0.15,
-                    child: SizedBox(
-                      height: 70,
-                      width: MediaQuery.of(context).size.width * 7,
-                      child: PhysicalModel(
-                        elevation: 10,
-                        shadowColor: Colors.black,
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(40),
-                        child: Center(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'ADVERT AND OFFERS',
-                              style: title(),
 
-                              // TextStyle(
-                              //     letterSpacing: 1,
-                              //     fontSize: 30,
-                              //     color: Colors.white,
-                              //     fontWeight: FontWeight.w900),
-                            )
+                  Visibility(
+                    visible:
+                        MediaQuery.of(context).size.width < 800 ? false : true,
+                    replacement: Positioned(
+                      top: 380,
+                      right: 10,
+                      left: 10,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 300,
+                              height: 60,
+                              child: MouseRegion(
+                                onEnter: (_) {
+                                  setState(() {
+                                    textHoverColor1 = Colors.blue;
+                                  });
+                                },
+                                onExit: (_) {
+                                  setState(() {
+                                    textHoverColor1 = Colors.black;
+                                  });
+                                },
+                                child: ListTile(
+                                  hoverColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () {},
+                                  leading: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    child: (Image.asset(
+                                        'assets/images/luggage.png')),
+                                  ),
+                                  title: Text(
+                                    'Holiday Escape',
+                                    style: TextStyle(
+                                        color: textHoverColor1,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900),
+                                  ),
+                                  isThreeLine: true,
+                                  subtitle: FittedBox(
+                                      child: Text(
+                                          style: TextStyle(
+                                            color: textHoverColor1,
+                                          ),
+                                          "Have you always wanted a place to 'japa' to and just \n lay back? we have special offers here")),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 300,
+                              height: 60,
+                              child: MouseRegion(
+                                onEnter: (_) {
+                                  setState(() {
+                                    textHoverColor2 = Colors.blue;
+                                  });
+                                },
+                                onExit: (_) {
+                                  setState(() {
+                                    textHoverColor2 = Colors.black;
+                                  });
+                                },
+                                child: ListTile(
+                                  hoverColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () {},
+                                  leading: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      child: Image.asset(
+                                          'assets/images/wallet.png')),
+                                  title: Text(
+                                    'Pay Small Small',
+                                    style: TextStyle(
+                                        color: textHoverColor2,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900),
+                                  ),
+                                  isThreeLine: true,
+                                  subtitle: FittedBox(
+                                      child: Text(
+                                          style:
+                                              TextStyle(color: textHoverColor2),
+                                          "Secure best travel deals and pay in convenient \n installments               ")),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              height: 60,
+                              child: MouseRegion(
+                                onEnter: (_) {
+                                  setState(() {
+                                    textHoverColor3 = Colors.blue;
+                                  });
+                                },
+                                onExit: (_) {
+                                  setState(() {
+                                    textHoverColor3 = Colors.black;
+                                  });
+                                },
+                                child: ListTile(
+                                  hoverColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () {},
+                                  leading: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      child: Image.asset(
+                                        'assets/images/map.png',
+                                      )),
+                                  title: Text(
+                                    'Travel Guide',
+                                    style: TextStyle(
+                                        color: textHoverColor3,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900),
+                                  ),
+                                  isThreeLine: true,
+                                  subtitle: FittedBox(
+                                      child: Text(
+                                          style:
+                                              TextStyle(color: textHoverColor3),
+                                          "Travel like a pro ; don't look like a first timer \n ")),
+                                ),
+                              ),
+                            ),
                           ],
-                        )),
+                        ),
+                      ),
+                    ),
+                    child: Positioned(
+                      top: 700,
+                      left: MediaQuery.of(context).size.width * 0.1,
+                      right: MediaQuery.of(context).size.width * 0.1,
+                      child: SizedBox(
+                        height: 70,
+                        width: MediaQuery.of(context).size.width * 7,
+                        child: PhysicalModel(
+                          elevation: 10,
+                          shadowColor: Colors.black45,
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.white,
+                          child: Center(
+                              child: FittedBox(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 300,
+                                  height: 60,
+                                  child: MouseRegion(
+                                    onEnter: (_) {
+                                      setState(() {
+                                        textHoverColor1 = Colors.blue;
+                                      });
+                                    },
+                                    onExit: (_) {
+                                      setState(() {
+                                        textHoverColor1 = Colors.black;
+                                      });
+                                    },
+                                    child: ListTile(
+                                      hoverColor: Colors.transparent,
+                                      splashColor: Colors.transparent,
+                                      onTap: () {},
+                                      leading: CircleAvatar(
+                                        backgroundColor: Colors.transparent,
+                                        child: (Image.asset(
+                                            'assets/images/luggage.png')),
+                                      ),
+                                      title: Text(
+                                        'Holiday Escape',
+                                        style: TextStyle(
+                                            color: textHoverColor1,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w900),
+                                      ),
+                                      isThreeLine: true,
+                                      subtitle: FittedBox(
+                                          child: Text(
+                                              style: TextStyle(
+                                                color: textHoverColor1,
+                                              ),
+                                              "Have you always wanted a place to 'japa' to without \n breaking the bank, we have special offers here")),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 1,
+                                  color: Colors.black26,
+                                  height: 70,
+                                ),
+                                Container(
+                                  width: 300,
+                                  height: 60,
+                                  child: MouseRegion(
+                                    onEnter: (_) {
+                                      setState(() {
+                                        textHoverColor2 = Colors.blue;
+                                      });
+                                    },
+                                    onExit: (_) {
+                                      setState(() {
+                                        textHoverColor2 = Colors.black;
+                                      });
+                                    },
+                                    child: ListTile(
+                                      hoverColor: Colors.transparent,
+                                      splashColor: Colors.transparent,
+                                      onTap: () {},
+                                      leading: CircleAvatar(
+                                          backgroundColor: Colors.transparent,
+                                          child: Image.asset(
+                                              'assets/images/wallet.png')),
+                                      title: Text(
+                                        'Pay Small Small',
+                                        style: TextStyle(
+                                            color: textHoverColor2,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w900),
+                                      ),
+                                      isThreeLine: true,
+                                      subtitle: FittedBox(
+                                          child: Text(
+                                              style: TextStyle(
+                                                  color: textHoverColor2),
+                                              "Secure best travel deals and pay in convenient \n installments               ")),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 1,
+                                  color: Colors.black26,
+                                  height: 70,
+                                ),
+                                Container(
+                                  width: 300,
+                                  height: 60,
+                                  child: MouseRegion(
+                                    onEnter: (_) {
+                                      setState(() {
+                                        textHoverColor3 = Colors.blue;
+                                      });
+                                    },
+                                    onExit: (_) {
+                                      setState(() {
+                                        textHoverColor3 = Colors.black;
+                                      });
+                                    },
+                                    child: ListTile(
+                                      hoverColor: Colors.transparent,
+                                      splashColor: Colors.transparent,
+                                      onTap: () {},
+                                      leading: CircleAvatar(
+                                          backgroundColor: Colors.transparent,
+                                          child: Image.asset(
+                                            'assets/images/map.png',
+                                          )),
+                                      title: Text(
+                                        'Travel Guide',
+                                        style: TextStyle(
+                                            color: textHoverColor3,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w900),
+                                      ),
+                                      isThreeLine: true,
+                                      subtitle: FittedBox(
+                                          child: Text(
+                                              style: TextStyle(
+                                                  color: textHoverColor3),
+                                              "Travel like a pro ; don't look like a first timer \n ")),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 200,
               ),
+
               //Carousel Slider
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
