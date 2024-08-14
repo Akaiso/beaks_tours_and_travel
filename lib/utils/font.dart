@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 return const TextStyle(fontSize: 13,fontWeight: FontWeight.w200);
 }
 
+TextStyle boldNormal(){
+ return const TextStyle(fontSize: 13,fontWeight: FontWeight.w900);
+}
+
 TextStyle blueNormal(){
  return const TextStyle(color: Colors.blue,fontSize: 13,fontWeight: FontWeight.w200);
 }
@@ -31,6 +35,12 @@ TextStyle? title(){
 TextStyle? small(){
  return const TextStyle(fontSize: 10,fontWeight: FontWeight.normal);
 }
+
+TextStyle? boldSmall(){
+ return const TextStyle(fontSize: 10,fontWeight: FontWeight.w900);
+}
+
+
 TextStyle? whiteSmall(){
  return const TextStyle(fontSize: 10,fontWeight: FontWeight.normal);
 }

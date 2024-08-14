@@ -32,27 +32,26 @@ class _CardWithDoubleRowsState extends State<CardWithDoubleRows> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               widget.headerRow,
+              //Row for two control buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   PhysicalModel(
                     shape: BoxShape.circle,
-                    color: Colors.transparent,
+                    color: Colors.white,
                     elevation: 5,
-                    child: CircleAvatar(
-                      child: IconButton(
-                        onPressed: () {
-                          scrollController1.animateTo(
-                              scrollController1.offset - MediaQuery.of(context).size.width,
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.easeInOut);
-                          scrollController2.animateTo(
-                              scrollController2.offset - 1000,
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.easeInOut);
-                        },
-                        icon: const Icon(Icons.chevron_left),
-                      ),
+                    child: IconButton(
+                      onPressed: () {
+                        scrollController1.animateTo(
+                            scrollController1.offset - MediaQuery.of(context).size.width,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                        scrollController2.animateTo(
+                            scrollController2.offset - 1000,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      },
+                      icon: const Icon(Icons.chevron_left),
                     ),
                   ),
                   const SizedBox(
@@ -60,22 +59,20 @@ class _CardWithDoubleRowsState extends State<CardWithDoubleRows> {
                   ),
                   PhysicalModel(
                     shape: BoxShape.circle,
-                    color: Colors.transparent,
+                    color: Colors.white,
                     elevation: 5,
-                    child: CircleAvatar(
-                      child: IconButton(
-                        onPressed: () {
-                          scrollController2.animateTo(
-                              scrollController2.offset + MediaQuery.of(context).size.width,
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.easeInOut);
-                          scrollController1.animateTo(
-                              scrollController1.offset + 1000,
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.easeInOut);
-                        },
-                        icon: const Icon(Icons.chevron_right),
-                      ),
+                    child: IconButton(
+                      onPressed: () {
+                        scrollController2.animateTo(
+                            scrollController2.offset + MediaQuery.of(context).size.width,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                        scrollController1.animateTo(
+                            scrollController1.offset + 1000,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      },
+                      icon: const Icon(Icons.chevron_right),
                     ),
                   ),
                 ],

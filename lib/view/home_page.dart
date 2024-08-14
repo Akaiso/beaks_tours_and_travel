@@ -47,11 +47,25 @@ class _HomePageState extends State<HomePage>
   String feel = ' happy ';
   bool isVisibleFlight = false;
   bool isVisibleHotel = false;
+  late Color flightColor;
+  late Color hotelColor ;
   bool flightRow = true;
   bool hotelRow = false;
   Color textHoverColor1 = Colors.black;
   Color textHoverColor2 = Colors.black;
   Color textHoverColor3 = Colors.black;
+
+  //external
+  bool _isFlightSelected = true; // initially, flight is selected by default
+  bool _isFlightHovered = false;
+  bool _isHotelHovered = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    flightColor = Colors.black;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +124,7 @@ class _HomePageState extends State<HomePage>
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    height: 740,
+                    height: MediaQuery.of(context).size.width < 800? 480 : 740,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       image: DecorationImage(
@@ -529,7 +543,7 @@ class _HomePageState extends State<HomePage>
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
                               width: 300,
                               height: 60,
                               child: MouseRegion(
@@ -607,7 +621,7 @@ class _HomePageState extends State<HomePage>
                                 ),
                               ),
                             ),
-                            Container(
+                            SizedBox(
                               width: 300,
                               height: 60,
                               child: MouseRegion(
@@ -667,7 +681,7 @@ class _HomePageState extends State<HomePage>
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 300,
                                   height: 60,
                                   child: MouseRegion(
@@ -712,7 +726,7 @@ class _HomePageState extends State<HomePage>
                                   color: Colors.black26,
                                   height: 70,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 300,
                                   height: 60,
                                   child: MouseRegion(
@@ -755,7 +769,7 @@ class _HomePageState extends State<HomePage>
                                   color: Colors.black26,
                                   height: 70,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 300,
                                   height: 60,
                                   child: MouseRegion(
@@ -803,11 +817,11 @@ class _HomePageState extends State<HomePage>
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 200,
+               SizedBox(
+                height: MediaQuery.of(context).size.width < 800? 120: 50,
               ),
 
-              //Carousel Slider
+              //Carousel Slider TODO CAROUSEL SLIDER
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: MultiImageCarousel(),
@@ -816,111 +830,344 @@ class _HomePageState extends State<HomePage>
               const SizedBox(
                 height: 30,
               ),
+
+              ///Card with Double Rows
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: CardWithDoubleRows(
-                  headerRow: Row(
-                    children: [
-                      Text(
-                        'Offers',
-                        style: subtitle(),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              flightRow = true;
-                              hotelRow = false;
-                            });
-                          },
-                          child: MouseRegion(
-                            onEnter: (_) {
-                              setState(() {
-                                isVisibleFlight = true;
-                              });
-                            },
-                            onExit: (_) {
-                              setState(() {
-                                isVisibleFlight = false;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Flight',
-                                  style:
-                                      isVisibleFlight ? blueNormal() : normal(),
+                  headerRow: SizedBox( width: MediaQuery.of(context).size.width / 3,
+                    child: MediaQuery.of(context).size.width < 800? Column(
+                      children: [
+                        Text(
+                          'Offers',
+                          style: boldNormal(), //subtitle(),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(children: [
+                          MouseRegion(
+                            onEnter: (_)=> setState(() {
+                              _isFlightHovered = true;
+                            }),
+                            onExit: (_)=> setState(() {
+                              _isFlightHovered = false;
+                            }),
+                            child: Container(width: 80,
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _isFlightSelected = true;
+                                  });
+                                },
+                                child: Column(
+                                    children: [
+                                      Text('Flights', style: TextStyle(color: (_isFlightSelected || _isFlightHovered) ? Colors.orange : Colors.blue),),
+                                      AnimatedContainer(
+                                          duration: Duration(milliseconds: 300),
+                                          height: 2,
+                                          color: (_isFlightSelected || _isFlightHovered) ? Colors.orange : Colors.transparent,
+                                          margin: EdgeInsets.only(top: 4)
+                                      )
+                                    ]
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Visibility(
-                                  visible: isVisibleFlight,
-                                  child: Container(
-                                    height: 3,
-                                    width: double.infinity,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: InkWell(
-                          onTap: () {
-                            hotelRow = false;
-                            flightRow = false;
-                          },
-                          child: MouseRegion(
-                            onEnter: (_) {
-                              setState(() {});
-                              isVisibleHotel = true;
-                            },
-                            onExit: (_) {
-                              setState(() {});
-                              isVisibleHotel = false;
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Hotel',
-                                  style:
-                                      isVisibleHotel ? blueNormal() : normal(),
+                          MouseRegion(
+                            onEnter: (_) => setState(() {
+                              _isHotelHovered = true;
+                            }),
+                            onExit: (_)=> setState(() {
+                              _isHotelHovered = false;
+                            }),
+                            child: Container(width: 80,
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    _isFlightSelected = false;
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Text('Hotel', style: TextStyle(color: (!_isFlightSelected || _isHotelHovered)? Colors.orange : Colors.blue),),
+                                    AnimatedContainer(duration: Duration(milliseconds: 300),
+                                      height: 2,
+                                      color: (!_isFlightSelected || _isHotelHovered)? Colors.orange : Colors.transparent,
+                                      margin: EdgeInsets.only(top: 4),)
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Visibility(
-                                  visible: isVisibleHotel,
-                                  child: Container(
-                                    color: Colors.blue,
-                                    height: 3,
-                                    width: double.infinity,
-                                  ),
-                                )
+                              ),
+                            ),
+                          ),
+                        ],),
 
-                                //  Container(height: 3,width: double.infinity, color: Colors.blue,child: hoverFillAnimation,),
-                              ],
+
+                        // SizedBox(
+                        //   width: 80,
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         flightRow = true;
+                        //         hotelRow = false;
+                        //
+                        //       });
+                        //     },
+                        //     child: MouseRegion(
+                        //       onEnter: (_) {
+                        //         setState(() {
+                        //           isVisibleFlight = true;
+                        //         });
+                        //       },
+                        //       onExit: (_) {
+                        //         setState(() {
+                        //           isVisibleFlight = false;
+                        //         });
+                        //       },
+                        //       child: Column(
+                        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             'Flight',
+                        //             style: TextStyle(color: flightBlueColor),
+                        //               //  isVisibleFlight  ? blueNormal() : normal(),
+                        //           ),
+                        //           const SizedBox(
+                        //             height: 10,
+                        //           ),
+                        //           Visibility(
+                        //             visible: isVisibleFlight,
+                        //             child: Container(
+                        //               height: 3,
+                        //               width: double.infinity,
+                        //               color: Colors.blue,
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   width: 10,
+                        // ),
+                        // SizedBox(
+                        //   width: 80,
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       hotelRow = false;
+                        //       flightRow = false;
+                        //       setState(() {
+                        //         hotelColor = Colors.blue;
+                        //       });
+                        //
+                        //     },
+                        //     child: MouseRegion(
+                        //       onEnter: (_) {
+                        //         setState(() {});
+                        //         isVisibleHotel = true;
+                        //         hotelColor = Colors.blue;
+                        //       },
+                        //       onExit: (_) {
+                        //         setState(() {});
+                        //         isVisibleHotel = false;
+                        //         hotelColor = Colors.black;
+                        //       },
+                        //       child: Column(
+                        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             'Hotel',
+                        //             style: TextStyle(color: hotelColor)
+                        //               //  isVisibleHotel ? blueNormal() : normal(),
+                        //           ),
+                        //           const SizedBox(
+                        //             height: 10,
+                        //           ),
+                        //           Visibility(
+                        //             visible: isVisibleHotel,
+                        //             child: Container(
+                        //               color: Colors.blue,
+                        //               height: 3,
+                        //               width: double.infinity,
+                        //             ),
+                        //           )
+                        //
+                        //           //  Container(height: 3,width: double.infinity, color: Colors.blue,child: hoverFillAnimation,),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        const Column(),
+                      ],
+                    ) :
+
+                    Row(
+                      children: [
+                        Text(
+                          'Offers',
+                          style: subtitle(),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        MouseRegion(
+                          onEnter: (_)=> setState(() {
+                            _isFlightHovered = true;
+                          }),
+                          onExit: (_)=> setState(() {
+                            _isFlightHovered = false;
+                          }),
+                          child: Container(width: 80,
+                            child: GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  _isFlightSelected = true;
+                                });
+                              },
+                              child: Column(
+                                children: [
+                                  Text('Flights', style: TextStyle(color: (_isFlightSelected || _isFlightHovered) ? Colors.orange : Colors.blue),),
+                                  AnimatedContainer(
+                                    duration: Duration(milliseconds: 300),
+                                    height: 2,
+                                    color: (_isFlightSelected || _isFlightHovered) ? Colors.orange : Colors.transparent,
+                                    margin: EdgeInsets.only(top: 4)
+                                  )
+                                ]
+                              ),
+                                                      ),
+                          ),
+                        ),
+                        MouseRegion(
+                          onEnter: (_) => setState(() {
+                            _isHotelHovered = true;
+                          }),
+                          onExit: (_)=> setState(() {
+                            _isHotelHovered = false;
+                          }),
+                          child: Container(width: 80,
+                            child: GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  _isFlightSelected = false;
+                                });
+                              },
+                              child: Column(
+                                children: [
+                                  Text('Hotel', style: TextStyle(color: (!_isFlightSelected || _isHotelHovered)? Colors.orange : Colors.blue),),
+                                  AnimatedContainer(duration: Duration(milliseconds: 300),
+                                  height: 2,
+                                  color: (!_isFlightSelected || _isHotelHovered)? Colors.orange : Colors.transparent,
+                                  margin: EdgeInsets.only(top: 4),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const Column(),
-                    ],
+
+                        // SizedBox(
+                        //   width: 80,
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         flightRow = true;
+                        //         hotelRow = false;
+                        //
+                        //       });
+                        //     },
+                        //     child: MouseRegion(
+                        //       onEnter: (_) {
+                        //         setState(() {
+                        //           isVisibleFlight = true;
+                        //         });
+                        //       },
+                        //       onExit: (_) {
+                        //         setState(() {
+                        //           isVisibleFlight = false;
+                        //         });
+                        //       },
+                        //       child: Column(
+                        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             'Flight',
+                        //             style: TextStyle(color: flightBlueColor),
+                        //               //  isVisibleFlight  ? blueNormal() : normal(),
+                        //           ),
+                        //           const SizedBox(
+                        //             height: 10,
+                        //           ),
+                        //           Visibility(
+                        //             visible: isVisibleFlight,
+                        //             child: Container(
+                        //               height: 3,
+                        //               width: double.infinity,
+                        //               color: Colors.blue,
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   width: 10,
+                        // ),
+                        // SizedBox(
+                        //   width: 80,
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       hotelRow = false;
+                        //       flightRow = false;
+                        //       setState(() {
+                        //         hotelColor = Colors.blue;
+                        //       });
+                        //
+                        //     },
+                        //     child: MouseRegion(
+                        //       onEnter: (_) {
+                        //         setState(() {});
+                        //         isVisibleHotel = true;
+                        //         hotelColor = Colors.blue;
+                        //       },
+                        //       onExit: (_) {
+                        //         setState(() {});
+                        //         isVisibleHotel = false;
+                        //         hotelColor = Colors.black;
+                        //       },
+                        //       child: Column(
+                        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             'Hotel',
+                        //             style: TextStyle(color: hotelColor)
+                        //               //  isVisibleHotel ? blueNormal() : normal(),
+                        //           ),
+                        //           const SizedBox(
+                        //             height: 10,
+                        //           ),
+                        //           Visibility(
+                        //             visible: isVisibleHotel,
+                        //             child: Container(
+                        //               color: Colors.blue,
+                        //               height: 3,
+                        //               width: double.infinity,
+                        //             ),
+                        //           )
+                        //
+                        //           //  Container(height: 3,width: double.infinity, color: Colors.blue,child: hoverFillAnimation,),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        const Column(),
+                      ],
+                    ),
                   ),
-                  row1: flightRow ? flightRowRow : hotelRowRow,
+                  row1: _isFlightSelected? flightRowRow : hotelRowRow, //flightRow ? flightRowRow : hotelRowRow,
 
                   // const Row(
                   //   children: [
@@ -936,7 +1183,7 @@ class _HomePageState extends State<HomePage>
                   //     FlightOffersModel(),
                   //   ],
                   // ),
-                  row2: flightRow ? flightRowRow : hotelRowRow,
+                  row2: _isFlightSelected? flightRowRow : hotelRowRow, //flightRow ? flightRowRow : hotelRowRow,
 
                   // const Row(
                   //   children: [
